@@ -35,7 +35,6 @@ public class GornerTableModel extends AbstractTableModel {
     public Object getValueAt(int row, int col) {
 // Вычислить значение X как НАЧАЛО_ОТРЕЗКА + ШАГ*НОМЕР_СТРОКИ
         double x = from + step*row;
-        // Вычислить значение X как НАЧАЛО_ОТРЕЗКА + ШАГ*НОМЕР_СТРОКИ
         Double result = 0.0;
         switch (col)
         {
@@ -44,8 +43,6 @@ public class GornerTableModel extends AbstractTableModel {
             return x; }
             case 1:{
 // Вычисление значения в точке по схеме Горнера.
-// Вспомнить 1-ый курс и реализовать
-// ...
             for (int i = coefficients.length - 1; i >= 0; i--)
             {
                 result *= x;
@@ -85,7 +82,7 @@ public class GornerTableModel extends AbstractTableModel {
                 return "Значение X";
             case 1:
                 // Название 2-го столбца
-                return "Значение многочлена в double";
+                return "Значение многочлена";
             default:
                 // Название 4-го столбца
                 return "Ограниченная симметрия";
