@@ -18,13 +18,8 @@ public class GornerTableCellRenderer implements TableCellRenderer{
     private DecimalFormat formatter = (DecimalFormat)NumberFormat.getInstance();
     public void setNeedle(String needle) {
         this.needle = needle;
-
     }
     public GornerTableCellRenderer() {
-// Разместить надпись внутри панели
-        panel.add(label);
-// Установить выравнивание надписи по левому краю панели
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         // Показывать только 5 знаков после запятой
         formatter.setMaximumFractionDigits(5);
 // Не использовать группировку (не отделять тысячи)
@@ -36,17 +31,30 @@ public class GornerTableCellRenderer implements TableCellRenderer{
         DecimalFormatSymbols dottedDouble = formatter.getDecimalFormatSymbols();
         dottedDouble.setDecimalSeparator('.');
         formatter.setDecimalFormatSymbols(dottedDouble);
+        // Разместить надпись внутри панели
+        panel.add(label);
+// Установить выравнивание надписи по левому краю панели
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT));
     }
-
-
-
 
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object
             value, boolean isSelected, boolean hasFocus, int row, int col) {
-// TODO Auto-generated method stub
-        return null;
+// Преобразовать число в строку с помощью форматировщика
+        String formattedDouble = formatter.format(value);
+// Установить текст надписи равным строковому представлению числа
+        label.setText(formattedDouble);
+        if ( (col == 1) && needle != null && needle.equals(formattedDouble))
+        {
+            label.setText("true");
+                    }
+        else {
+            // Иначе - в обычный белый
+            panel.setBackground(Color.WHITE);
+        }
+        return panel;
+
     }
 
 }
