@@ -43,21 +43,32 @@ public class GornerTableCellRenderer implements TableCellRenderer{
             value, boolean isSelected, boolean hasFocus, int row, int col) {
 // Преобразовать число в строку с помощью форматировщика
         String formattedDouble = formatter.format(value);
-        int i;
+
+
 // Установить текст надписи равным строковому представлению числа
         label.setText(formattedDouble);
+        int index = formattedDouble.indexOf('.');
+
         if ( (col == 1) && needle != null && needle.equals(formattedDouble))
         {
-
-            label.setText("true");
-                    }
-
+            panel.setBackground(Color.RED);
+        }
         else {
             // Иначе - в обычный белый
             panel.setBackground(Color.WHITE);
         }
+
+        String sub=formattedDouble.substring(index+1);
+        int result = 0;
+        if(formattedDouble.contains("."))
+        {
+       for (int i = 0 ; i<sub.length(); i++)
+        {
+            result = result + Integer.parseInt(String.valueOf(sub.charAt(i)));
+        }
+        if(result%10==0)
+        {panel.setBackground(Color.ORANGE);}}
+
         return panel;
-
     }
-
 }
